@@ -1,5 +1,5 @@
 # Arquitetura de Software Distribuido
-## Arquitetura Front-end Atividade Final
+> Atividades Final - Arquitetura de Front-End
 
-### Alunos:
-[] Caio Goulart Boni
+## Alunos
+1. **Caio Goulart Boni**
