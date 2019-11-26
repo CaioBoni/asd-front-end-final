@@ -9,6 +9,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DetalhesComponent implements OnInit {
 
+  // page: 1
+  // results: Array(20)
+  // 0:
+  // adult: false
+  // backdrop_path: "/xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg"
+  // genre_ids: (5) [12, 16, 35, 10402, 10751]
+  // id: 330457
+  // original_language: "en"
+  // original_title: "Frozen II"
+  // overview: "Elsa, Anna, Kristoff and Olaf are going far in the forest to know the truth about an ancient mystery of their kingdom."
+  // popularity: 459.869
+  // poster_path: "/qdfARIhgpgZOBh3vfNhWS4hmSo3.jpg"
+  // release_date: "2019-11-20"
+  // title: "Frozen II"
+  // video: false
+  // vote_average: 6.9
+  // vote_count: 228
+
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {}
 
   ngOnInit(): void {
