@@ -20,7 +20,7 @@ export class PainelNavegacaoComponent implements OnInit {
         this.datasource = retorno.results;
         this.cards = this.datasource;
       } else {
-        window.alert("Não foi possível consultar lista de filmes");
+        window.alert('Não foi possível consultar lista de filmes');
       }
     });
   }

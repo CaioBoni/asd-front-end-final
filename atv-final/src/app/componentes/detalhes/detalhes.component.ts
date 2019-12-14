@@ -1,3 +1,4 @@
+import { FilmeService } from 'src/app/service/filme.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,118 +10,81 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DetalhesComponent implements OnInit {
 
-  // page: 1
-  // results: Array(20)
-  // 0:
-  // adult: false
-  // backdrop_path: "/xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg"
-  // genre_ids: (5) [12, 16, 35, 10402, 10751]
-  // id: 330457
-  // original_language: "en"
-  // original_title: "Frozen II"
-  // overview: "Elsa, Anna, Kristoff and Olaf are going far in the forest to know the truth about an ancient mystery of their kingdom."
-  // popularity: 459.869
-  // poster_path: "/qdfARIhgpgZOBh3vfNhWS4hmSo3.jpg"
-  // release_date: "2019-11-20"
-  // title: "Frozen II"
-  // video: false
-  // vote_average: 6.9
-  // vote_count: 228
+  filme = {
+    adult: false,
+    backdrop_path: '',
+    belongs_to_collection: null,
+    budget: 0,
+    genres: [],
+    homepage: '',
+    id: 0,
+    imdb_id: '',
+    original_language: '',
+    original_title: '',
+    overview: '',
+    popularity: 0,
+    poster_path: '',
+    production_companies: [],
+    production_countries: [],
+    release_date: '',
+    revenue: 0,
+    runtime: 0,
+    spoken_languages: [],
+    status: '',
+    tagline: '',
+    title: '',
+    video: false,
+    vote_average: 0,
+    vote_count: 0
+  };
 
-  constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: FilmeService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      if(params.id && params.id != 0) {
-
-        //TODO - PREENCHER DETALHES
-
+      if (params.id && params.id !== 0) {
+        this.service.buscarFilme(params.id).subscribe(retorno => {
+          this.updateFilme(retorno);
+          console.log('filme', this.filme);
+        });
       } else {
         this.router.navigate(['index']);
       }
     });
   }
 
-  addressForm = this.fb.group({
-    company: null,
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    address: [null, Validators.required],
-    address2: null,
-    city: [null, Validators.required],
-    state: [null, Validators.required],
-    postalCode: [null, Validators.compose([
-      Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-    ],
-    shipping: ['free', Validators.required]
-  });
-
-  hasUnitNumber = false;
-
-  states = [
-    {name: 'Alabama', abbreviation: 'AL'},
-    {name: 'Alaska', abbreviation: 'AK'},
-    {name: 'American Samoa', abbreviation: 'AS'},
-    {name: 'Arizona', abbreviation: 'AZ'},
-    {name: 'Arkansas', abbreviation: 'AR'},
-    {name: 'California', abbreviation: 'CA'},
-    {name: 'Colorado', abbreviation: 'CO'},
-    {name: 'Connecticut', abbreviation: 'CT'},
-    {name: 'Delaware', abbreviation: 'DE'},
-    {name: 'District Of Columbia', abbreviation: 'DC'},
-    {name: 'Federated States Of Micronesia', abbreviation: 'FM'},
-    {name: 'Florida', abbreviation: 'FL'},
-    {name: 'Georgia', abbreviation: 'GA'},
-    {name: 'Guam', abbreviation: 'GU'},
-    {name: 'Hawaii', abbreviation: 'HI'},
-    {name: 'Idaho', abbreviation: 'ID'},
-    {name: 'Illinois', abbreviation: 'IL'},
-    {name: 'Indiana', abbreviation: 'IN'},
-    {name: 'Iowa', abbreviation: 'IA'},
-    {name: 'Kansas', abbreviation: 'KS'},
-    {name: 'Kentucky', abbreviation: 'KY'},
-    {name: 'Louisiana', abbreviation: 'LA'},
-    {name: 'Maine', abbreviation: 'ME'},
-    {name: 'Marshall Islands', abbreviation: 'MH'},
-    {name: 'Maryland', abbreviation: 'MD'},
-    {name: 'Massachusetts', abbreviation: 'MA'},
-    {name: 'Michigan', abbreviation: 'MI'},
-    {name: 'Minnesota', abbreviation: 'MN'},
-    {name: 'Mississippi', abbreviation: 'MS'},
-    {name: 'Missouri', abbreviation: 'MO'},
-    {name: 'Montana', abbreviation: 'MT'},
-    {name: 'Nebraska', abbreviation: 'NE'},
-    {name: 'Nevada', abbreviation: 'NV'},
-    {name: 'New Hampshire', abbreviation: 'NH'},
-    {name: 'New Jersey', abbreviation: 'NJ'},
-    {name: 'New Mexico', abbreviation: 'NM'},
-    {name: 'New York', abbreviation: 'NY'},
-    {name: 'North Carolina', abbreviation: 'NC'},
-    {name: 'North Dakota', abbreviation: 'ND'},
-    {name: 'Northern Mariana Islands', abbreviation: 'MP'},
-    {name: 'Ohio', abbreviation: 'OH'},
-    {name: 'Oklahoma', abbreviation: 'OK'},
-    {name: 'Oregon', abbreviation: 'OR'},
-    {name: 'Palau', abbreviation: 'PW'},
-    {name: 'Pennsylvania', abbreviation: 'PA'},
-    {name: 'Puerto Rico', abbreviation: 'PR'},
-    {name: 'Rhode Island', abbreviation: 'RI'},
-    {name: 'South Carolina', abbreviation: 'SC'},
-    {name: 'South Dakota', abbreviation: 'SD'},
-    {name: 'Tennessee', abbreviation: 'TN'},
-    {name: 'Texas', abbreviation: 'TX'},
-    {name: 'Utah', abbreviation: 'UT'},
-    {name: 'Vermont', abbreviation: 'VT'},
-    {name: 'Virgin Islands', abbreviation: 'VI'},
-    {name: 'Virginia', abbreviation: 'VA'},
-    {name: 'Washington', abbreviation: 'WA'},
-    {name: 'West Virginia', abbreviation: 'WV'},
-    {name: 'Wisconsin', abbreviation: 'WI'},
-    {name: 'Wyoming', abbreviation: 'WY'}
-  ];
-
-
-  onSubmit() {
-    alert('Thanks!');
+  updateFilme(retorno) {
+    this.filme = {
+      adult: retorno.adult,
+      backdrop_path: retorno.backdrop_path,
+      belongs_to_collection: retorno.belongs_to_collection,
+      budget: retorno.budget,
+      genres: retorno.genres,
+      homepage: retorno.homepage,
+      id: retorno.id,
+      imdb_id: retorno.imdb_id,
+      original_language: retorno.original_language,
+      original_title: retorno.original_title,
+      overview: retorno.overview,
+      popularity: retorno.popularity,
+      poster_path: retorno.poster_path,
+      production_companies: retorno.production_companies,
+      production_countries: retorno.production_countries,
+      release_date: retorno.release_date,
+      revenue: retorno.revenue,
+      runtime: retorno.runtime,
+      spoken_languages: retorno.spoken_languages,
+      status: retorno.status,
+      tagline: retorno.tagline,
+      title: retorno.title,
+      video: retorno.video,
+      vote_average: retorno.vote_average,
+      vote_count: retorno.vote_count
+    };
   }
+
 }
