@@ -7,7 +7,7 @@
       <div style="text-align: center;">
         <img style="max-width: 500px;" mat-card-image src="{{'http://image.tmdb.org/t/p/w92' +  filme.poster_path }}" alt="Photo"><br>
       </div>
-      <label>Título: {{ filme.original_title }}</label><br><br>
+      <label>Título: {{ filme.title }}</label><br><br>
       <label>Descrição: {{ filme.overview }}</label><br><br>
 
       <label>Adulto: {{ filme.adult == true ? 'Sim' : 'Não' }}</label><br><br>
@@ -20,16 +20,17 @@
       <label>Lingua original: {{ filme.original_language }}</label><br><br>
       <label>Popularidade: {{ filme.popularity }}</label><br><br>
 
-      <label>Produtoras</label>
+      <label *ngIf="filme.production_companies.length > 0">Produtoras</label>
       <div *ngFor="let item of filme.production_companies">
         <li>{{ item.name }}</li>
       </div><br>
 
-      <label>Países</label>
+      <label *ngIf="filme.production_countries.length > 0">Países</label>
       <div *ngFor="let item of filme.production_countries">
         <li>{{ item.name }}</li>
       </div><br>
 
+      <label>Título Orginial: {{ filme.original_title }}</label><br><br>
       <label>Data: {{ filme.release_date }}</label><br><br>
 
       <label>Tempo de execução: {{ filme.runtime }}</label><br><br>
