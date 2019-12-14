@@ -21,6 +21,9 @@
 }
 
 .card {
-  width: 100%;
+  margin: 5%;
+}
+
+.content {
   margin: 5%;
 }
