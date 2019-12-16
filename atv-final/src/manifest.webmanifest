@@ -1,0 +1,9 @@
+{
+	"name" : "Movies DB",
+	"short_name" : "Movies DB",
+	"description" : "App para catálogo de filmes",
+	"start_url" : "http://localhost:4200/index",
+	"display" : "standalone",
+	"orientation" : "natural",
+	"lang" : "Portuguese"
+}
